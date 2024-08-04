@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import Header from '../common/Header';
 
 const Login = () => {
     const router = useNavigate();
@@ -15,50 +16,53 @@ const Login = () => {
             toast.error("User not registered");
             router('/login');
         } else if (item && item.email === email && item.password === password) {
-            localStorage.removeItem("auth");
+            // localStorage.removeItem("auth");
             router('/dashboard');
         }
     }
 
     return (
-        <div className='flex justify-center items-center h-screen'>
-            <div className=' p-8 rounded-md shadow-2xl min-w-[400px]'>
+        <div className=' h-screen '>
+            <Header />
+        <div className='flex justify-center items-center mt-28'>
+            <div className=' w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow '>
                 <h4 className='text-center p-4 text-2xl font-bold '>Login</h4>
-                <form onSubmit={handleSubmit} className='flex flex-col'>
+                <form onSubmit={handleSubmit} className='flex-col'>
                     <div className='p-2'>
-                        <label className='text-lg'>Email:</label>
+                        <label className='text-lg'>Email</label>
                         <input
                             type='email'
                             required
                             value={email}
                             onChange={(e) => { setEmail(e.target.value) }}
                             placeholder='Enter your email'
-                            className='rounded-md p-2 border border-gray-300 focus:outline-none ml-12 min-w-[300px]'
+                            className='rounded-md p-2 border border-gray-300 focus:outline-none  min-w-full'
                         />
                     </div>
                     <div className='p-2 '>
-                        <label className='text-lg'>Password:</label>
+                        <label className='text-lg'>Password</label>
                         <input
                             type='password'
                             required
                             onChange={(e) => { setPassword(e.target.value) }}
                             value={password}
                             placeholder='Enter your password'
-                            className='rounded-md p-2 border border-gray-300 focus:outline-none ml-3 min-w-[300px]'
+                            className='rounded-md p-2 border border-gray-300 focus:outline-none  min-w-full'
                         />
                     </div>
                     <div className='flex justify-center p-2'>
-                        <button type='submit' className='p-2 bg-blue-600 rounded-lg text-white hover:bg-blue-900'>
+                        <button type='submit' className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
                             Submit
                         </button>
                     </div>
                 </form>
                 <div className='flex justify-center p-2'>
-                    <p className='text-lg'>
-                        New User, <span className='text-blue-500 underline text-md'><Link to='/signup'>Register</Link></span>
+                    <p className='text-sm'>
+                        New User, <span className='text-blue-500 underline text-sm'><Link to='/signup'>Register</Link></span>
                     </p>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
